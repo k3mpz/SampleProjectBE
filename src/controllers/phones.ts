@@ -13,6 +13,18 @@ export const getAllPhones = async (req: express.Request, res: express.Response) 
   }
 };
 
+export const getPhone = async (req: express.Request, res: express.Response) => {
+  try {
+    const { id } = req.params;
+    const phone = await getPhoneById(id);
+
+    return res.json(phone);
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(400);
+  }
+};
+
 export const deletePhone = async (req: express.Request, res: express.Response) => {
   try {
     const { id } = req.params;

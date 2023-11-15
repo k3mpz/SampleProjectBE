@@ -1,4 +1,7 @@
+'use client'
+import axios from "axios";
 import React from "react"
+import { useRouter } from 'next/navigation'
 
 interface Phone {
     id: string,
@@ -13,12 +16,8 @@ interface Phone {
     has_5g_lte: boolean,
 }
 const PhonesPage = async() => {
-    try{
-        const res = await fetch(
-            'https://sample-project-be.vercel.app:8080/phones/'
-            , { cache: 'no-store' }
-            )
-        const phones: Phone[] = await res.json();
+        const res = await axios.get('/api/getphones/');
+        const phones: Phone[] = res.data;
         return (
             <div>
                 <h1>All Phones</h1>
@@ -49,9 +48,6 @@ const PhonesPage = async() => {
                 </table>
             </div>
         )
-    }catch(error){
-        console.log(error)
-    }
 }
 
 export default PhonesPage

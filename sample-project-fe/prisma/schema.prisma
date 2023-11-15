@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+model Phone {
+  id         String     @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  unit      String
+  brand      String
+  manufacturer      String
+  ram_size      String
+  rom_size      String
+  is_dual_sim  Boolean    @default(true)
+  has_5g_lte  Boolean    @default(true)
+  createdAt DateTime @default(now())
+}

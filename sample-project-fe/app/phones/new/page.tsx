@@ -14,8 +14,8 @@ interface PhoneForm {
     cpu: string,
     ram_size: number,
     rom_size: number,
-    is_dual_sim: string,
-    has_5g_lte: string,
+    is_dual_sim: boolean,
+    has_5g_lte: boolean,
 }
 const NewPhone: React.FC = () => {
     const router = useRouter()
@@ -39,11 +39,10 @@ const NewPhone: React.FC = () => {
             <form 
             className='max-w-xl space-y-3' 
             onSubmit={handleSubmit( async(data) => {
-                data.is_dual_sim = dualSimValue
-                data.has_5g_lte = has5GValue
-                console.log(data)
+                data.is_dual_sim = (dualSimValue === "1")
+                data.has_5g_lte = (has5GValue === "1")
                 try{
-                    await axios.post('https://sample-project-be.vercel.app:8080/phones/create', data)
+                    await axios.post('/api/phones', data)
                     router.push('/phones')
                 }catch(error){
                     setError('An error occured.')

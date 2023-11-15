@@ -1,7 +1,6 @@
 'use client'
 import axios from "axios";
 import React from "react"
-import { useRouter } from 'next/navigation'
 
 interface Phone {
     id: string,
@@ -16,6 +15,7 @@ interface Phone {
     has_5g_lte: boolean,
 }
 const PhonesPage = async() => {
+    try{
         const res = await axios.get('/api/getphones/');
         const phones: Phone[] = res.data;
         return (
@@ -48,6 +48,10 @@ const PhonesPage = async() => {
                 </table>
             </div>
         )
+    }catch(error){
+        console.log(error)
+    }
+        
 }
 
 export default PhonesPage

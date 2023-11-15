@@ -43,7 +43,7 @@ const NewPhone: React.FC = () => {
                 data.has_5g_lte = has5GValue
                 console.log(data)
                 try{
-                    await axios.post('http://localhost:8080/phones/create', data)
+                    await axios.post('https://sample-project-be.vercel.app:8080/phones/create', data)
                     router.push('/phones')
                 }catch(error){
                     setError('An error occured.')
